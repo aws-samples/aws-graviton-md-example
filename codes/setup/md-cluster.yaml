@@ -1,0 +1,56 @@
+Imds:
+  ImdsSupport: v2.0
+HeadNode:
+  InstanceType: c7g.4xlarge
+  Imds:
+    Secured: true
+  Ssh:
+    KeyName: <your_key_name>
+  LocalStorage:
+    RootVolume:
+      VolumeType: gp3
+      Size: 300
+  Networking:
+    SubnetId: <subnet ID>
+  Iam:
+    AdditionalIamPolicies:
+      - Policy: arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+      - Policy: arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+  Dcv:
+    Enabled: true
+Scheduling:
+  Scheduler: slurm
+  SlurmQueues:
+    - Name: queue-1
+      AllocationStrategy: lowest-price
+      ComputeResources:
+        - Name: queue-1-cr-1
+          Instances:
+            - InstanceType: hpc7g.16xlarge
+          MinCount: 0
+          MaxCount: 64
+          Efa:
+            Enabled: true
+      ComputeSettings:
+        LocalStorage:
+          RootVolume:
+            VolumeType: gp3
+      Networking:
+        SubnetIds:
+          - <subnet ID>
+        PlacementGroup:
+          Enabled: true
+  SlurmSettings: {}
+Region: us-east-1
+Image:
+  Os: alinux2
+SharedStorage:
+  - Name: FsxLustre0
+    StorageType: FsxLustre
+    MountDir: /fsx
+    FsxLustreSettings:
+      DeletionPolicy: Delete
+      StorageCapacity: '4800'
+      DeploymentType: PERSISTENT_2
+      PerUnitStorageThroughput: 1000
+      DataCompressionType: LZ4
