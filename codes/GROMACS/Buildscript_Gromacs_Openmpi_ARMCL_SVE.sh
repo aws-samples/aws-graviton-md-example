@@ -15,7 +15,8 @@ cd /home/ec2-user/software/gromacs-2022.5
 mkdir build_sve
 cd build_sve 
 
-## Gromacs for ARM compiler
+## Gromacs for ARM compiler (assuming you installed ACfL on /shared/arm)
+module use /shared/arm/modulefiles
 module load libfabric-aws
 module load acfl/23.04.1
 module load armpl/23.04.1

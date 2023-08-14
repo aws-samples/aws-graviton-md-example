@@ -22,10 +22,13 @@ Follow the instructions under the [Graviton getting started guide](https://githu
 
 ## GROMACS
 
+To build GROMACS with optimized SVE settings, execute the [Buildscript_Gromacs_Onempi_ARMCL_SVE.sh](/codes/GROMACS/Buildscript_Gromacs_Openmpi_ARMCL_SVE.sh) script on the head node. This script assumes that you are using an EC2 instance with c7g.4xlarge for your head node. 
 
+Once you have successfully installed GROMACS into your home directory, you can submit a job onto the compute nodes. [Runscript_testcaseA-onehpc7g.sbatch.sh](/codes/GROMACS/Runscript_testcaseA-onehpc7g.sbatch.sh) is an example of a Slurm job script for GROMACS. 
 
 ## LAMMPS
 
+To build LAMMPS with optimized SVE settings, execute the [compile-lammps.sh](/codes/LAMMPS/compile-lammps.sh) script on the head node. This script assumes that you are using an EC2 instance with c7g.4xlarge for your head node.
 
 ## Security
 
