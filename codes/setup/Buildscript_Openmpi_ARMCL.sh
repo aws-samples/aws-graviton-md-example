@@ -19,7 +19,7 @@ wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.5.tar.gz
 tar zxvf openmpi-4.1.5.tar.gz
 cd openmpi-4.1.5
 ## configure (assuming you install openmpi in your /home directory)
-./configure --prefix=/home/ec2-user/openmpi-4.1.5-arml-34 CC=armclang CXX=armclang++ FC=armflang --enable-mpi-cxx --enable-mpi-fortran=all
+./configure --prefix=/home/ec2-user/openmpi-4.1.5-arml-34 CC=armclang CXX=armclang++ FC=armflang --enable-mpi-cxx --enable-mpi-fortran=all --without-verbs --enable-builtin-atomics --with-libfabric=/opt/amazon/efa  --with-libfabric-libdir=/opt/amazon/efa/lib64
 ## make for c7g.4xl
 make -j 16
 ## make install
