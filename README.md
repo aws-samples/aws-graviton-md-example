@@ -22,12 +22,27 @@ Follow the instructions under the [Graviton getting started guide](https://githu
 
 ## GROMACS
 
-To build GROMACS with optimized SVE settings, execute the [Buildscript_Gromacs_Onempi_ARMCL_SVE.sh](/codes/GROMACS/Buildscript_Gromacs_Openmpi_ARMCL_SVE.sh) script on the head node. This script assumes that you are using an EC2 instance with c7g.4xlarge for your head node. If you execute the script without modification it will install the software onto your home directory, but you can choose to change the installation directory by yourself. If you wish to do so, modify the part which says `cd /home/ec2-user/software/gromacs-2022.5`. 
+[GROMACS](https://www.gromacs.org/) is a free and open-source software suite for high-performance molecular dynamics and output analysis. You can download the source code from [here](https://manual.gromacs.org/). Example: 
+
+```bash
+cd <directory>
+wget https://ftp.gromacs.org/gromacs/gromacs-2023.2.tar.gz
+tar -xvzf gromacs-2023.2.tar.gz
+```
+
+To build GROMACS with optimized SVE settings, execute the [Buildscript_Gromacs_Onempi_ARMCL_SVE.sh](/codes/GROMACS/Buildscript_Gromacs_Openmpi_ARMCL_SVE.sh) script on the head node. This script assumes that you are using an EC2 instance with c7g.4xlarge for your head node. If you execute the script without modification it will install the software onto your home directory, but you can choose to change the installation directory by yourself.  
 
 Once you have successfully installed GROMACS, you can submit a job onto the compute nodes. [Runscript_testcaseA-onehpc7g.sbatch.sh](/codes/GROMACS/Runscript_testcaseA-onehpc7g.sbatch.sh) is an example of a Slurm job script for GROMACS. 
 
 ## LAMMPS
 
+[LAMMPS](https://www.lammps.org/) is a classical molecular dynamics simulator, and is used for particle-based modelling of materials. You can download the latest stable tarball on your cluster using the wget utility. 
+
+```bash
+cd <directory>
+wget https://download.lammps.org/tars/lammps-stable.tar.gz
+tar -xvzf lammps-stable.tar.gz
+```
 To build LAMMPS with optimized SVE settings, execute the [compile-lammps.sh](/codes/LAMMPS/compile-lammps.sh) script on the head node. This script assumes that you are using an EC2 instance with c7g.4xlarge for your head node.
 
 Submit your job with [lammps-submit.sh](/codes/LAMMPS/compile-lammps.sh). 

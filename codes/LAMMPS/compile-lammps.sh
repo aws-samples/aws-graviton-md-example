@@ -2,6 +2,11 @@
 
 # assuming you are installing LAMMPS under /fsx
 
+module use /shared/arm/modulefiles
+module load libfabric-aws
+module load acfl/23.04.1
+module load armpl/23.04.1
+
 INSTALL_FOLDER="/fsx"
 cd ${INSTALL_FOLDER}
 if [ ! -d "lammps" ]; then
