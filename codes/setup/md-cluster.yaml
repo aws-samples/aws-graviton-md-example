@@ -47,7 +47,7 @@ Image:
 SharedStorage:
   - Name: FsxLustre0
     StorageType: FsxLustre
-    MountDir: /fsx
+    MountDir: /shared
     FsxLustreSettings:
       DeletionPolicy: Delete
       StorageCapacity: '4800'

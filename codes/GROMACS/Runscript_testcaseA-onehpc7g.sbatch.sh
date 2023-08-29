@@ -16,11 +16,11 @@
 export OMP_NUM_THREADS=1
 module use /shared/arm/modulefiles
 module load libfabric-aws
-module load acfl/23.04.1
-module load armpl/23.04.1
+module load acfl
+module load armpl
 
 # You need to cd to the directory your input file (ion_channel.tpr) is in.
-# In this example we assume that you have the input file on /fsx/gromacsBM
+# In this example we assume that you have the input file on /shared/gromacsBM
 
-cd /fsx/gromacsBM
+cd /shared/gromacsBM
 mpirun -np $SLURM_NTASKS /home/ec2-user/gromacs2022.5-armcl-armcom/bin/gmx_mpi mdrun -s ion_channel.tpr -nsteps 10000
