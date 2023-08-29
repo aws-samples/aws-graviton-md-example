@@ -1,9 +1,3 @@
-##
-# Purpose: To submit your job in AWS ParallelCluster environment using SLURM scheduler
-# Software toolchain: OpenMPI 4.1.5 and ARM compiler for Linux 23.04
-# July, 2023 
-# JEN-CHANG CHEN; jamchn@amazon.com
-
 #!/bin/bash
 #SBATCH --job-name=Gromacs
 #SBATCH --nodes=1
@@ -12,6 +6,12 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --error=%x_%j.err
 #SBATCH --output=%x_%j.out
+
+##
+# Purpose: To submit your job in AWS ParallelCluster environment using SLURM scheduler
+# Software toolchain: OpenMPI 4.1.5 and ARM compiler for Linux 23.04
+# July, 2023 
+# JEN-CHANG CHEN; jamchn@amazon.com
 
 export OMP_NUM_THREADS=1
 module use /shared/arm/modulefiles
