@@ -23,4 +23,4 @@ module load armpl
 # In this example we assume that you have the input file on /shared/gromacsBM
 
 cd /shared/gromacsBM
-mpirun -np $SLURM_NTASKS /home/ec2-user/gromacs2022.5-armcl-armcom/bin/gmx_mpi mdrun -s ion_channel.tpr -nsteps 10000
+mpirun -np $SLURM_NTASKS /shared/gromacs2022.5-armcl-armcom/bin/gmx_mpi mdrun -s ion_channel.tpr -nsteps 10000
