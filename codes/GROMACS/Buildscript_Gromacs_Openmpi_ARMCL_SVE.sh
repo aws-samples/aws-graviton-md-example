@@ -18,12 +18,12 @@ cd build_sve
 ## Gromacs for ARM compiler (assuming you installed ACfL on /shared/arm)
 module use /shared/arm/modulefiles
 module load libfabric-aws
-module load acfl/23.04.1
-module load armpl/23.04.1
+module load acfl
+module load armpl
 
 export LDFLAGS='-larmpl -lm'
 cmake \
-        -DCMAKE_INSTALL_PREFIX=/fsx/gromacs2022.5-armcl-armcom \
+        -DCMAKE_INSTALL_PREFIX=/shared/gromacs2022.5-armcl-armcom \
         -DBUILD_SHARED_LIBS=off \
         -DBUILD_TESTING=off \
         -DREGRESSIONTEST_DOWNLOAD=OFF \

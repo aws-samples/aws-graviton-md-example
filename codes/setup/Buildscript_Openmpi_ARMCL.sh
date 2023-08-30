@@ -7,8 +7,8 @@
 # Prerequisite
 # ARM compiler for Linux 23.04 has been installed and loaded
 module load libfabric-aws
-module load acfl/23.04.1
-module load armpl/23.04.1 
+module load acfl
+module load armpl
 
 #!/bin/bash
 ## Create a folder under /home/ec2-user
