@@ -17,10 +17,8 @@ module load armpl/23.04.1
 module load libfabric-aws/1.17.1
 
 # Download test case
-
-# Download test case
 ls /shared/gromacsBM
-if [ $? -eq 1 ]; then
+if [ $? -ne 0 ]; then
   mkdir /shared/gromacsBM
 fi
 cd /shared/gromacsBM
