@@ -28,7 +28,7 @@ Scheduling:
           Instances:
             - InstanceType: hpc7g.16xlarge
           MinCount: 0
-          MaxCount: 64
+          MaxCount: 128
           Efa:
             Enabled: true
       ComputeSettings:
