@@ -42,8 +42,10 @@ Alternatively:  $ export MODULEPATH=$MODULEPATH:/shared/arm/modulefiles
 
 ### Open MPI
 
-ParallelCluster by default comes with Open MPI pre-installed, but it is compiled with gcc. In order for us to use Open MPI with Arm compilers, we will need to compile it with the newly installed ACfL. We recommend using Open MPI version 4.1.5. Use [this script](codes/setup/2-install-openmpi-with-acfl.sh) to install Open MPI 4.1.5 with ACfL. 
+ParallelCluster by default comes with Open MPI pre-installed, but the installed version is compiled with gcc. In order for us to use Open MPI with Arm compilers, we will need to compile it with the newly installed ACfL. We recommend using Open MPI version 4.1.5. Use [this script](codes/setup/2-install-openmpi-with-acfl.sh) to install Open MPI 4.1.5 with ACfL on the head node. The script installs Open MPI under the `/shared/tools/openmpi-4.1.5-arml-34/` directory. 
 
+> [!Tip]
+> To use the ACfL compiled Open MPI you will need to specify `PATH=/shared/tools/openmpi-4.1.5-arml-34/bin:$PATH` and `LD_LIBRARY_PATH=/shared/tools/openmpi-4.1.5-arml-34/lib:$LD_LIBRARY_PATH`. 
 
 ## GROMACS
 
