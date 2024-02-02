@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# assuming you are installing LAMMPS under /shared
-
 module use /shared/arm/modulefiles
 module load acfl/23.04.1
 module load armpl/23.04.1

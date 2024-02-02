@@ -19,12 +19,5 @@ module load libfabric-aws/1.17.1
 
 LAMMPS_BENCH="/shared/lammps/bench"
 cd ${LAMMPS_BENCH}
-pwd
 
-NX="32"
-NY="32"
-NZ="32"
-INPUT_FILE = "in.lj"
-mpirun -np $SLURM_NTASKS env LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/shared/lammps/armpl-sve/ \
-    /shared/lammps/armpl-sve/lmp_aarch64_arm_openmpi_armpl \
-    -var x $NX -var y $NY -var z $NZ -in ${INPUT_FILE}
+mpirun -np $SLURM_NTASKS env LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/shared/lammps/armpl-sve/ /shared/lammps/armpl-sve/lmp_aarch64_arm_openmpi_armpl -in in.lj
