@@ -16,8 +16,8 @@ Once you have created your VPC and subnets, use this [configuration file](codes/
 pcluster create-cluster -n gv-cluster -c 0-md-clutser.yaml
 ```
 
-[!Note]
-All of the steps in this repo were performed on ParallelCluster version 3.6.0.
+> [!Note]
+> All of the steps in this repo were performed and confirmed working on ParallelCluster version 3.6.0.
 
 ## Compilers & Libraries 
 
