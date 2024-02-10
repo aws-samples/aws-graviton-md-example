@@ -5,8 +5,8 @@ module load acfl/23.04.1
 module load armpl/23.04.1
 module load libfabric-aws/1.17.1
 
-export PATH=/shared/tools/openmpi-4.1.5-arml-34/bin:$PATH
-export LD_LIBRARY_PATH=/shared/tools/openmpi-4.1.5-arml-34/lib:$LD_LIBRARY_PATH
+export PATH=/shared/tools/openmpi-4.1.5-arml/bin:$PATH
+export LD_LIBRARY_PATH=/shared/tools/openmpi-4.1.5-arml/lib:$LD_LIBRARY_PATH
 export INSTALLDIR=~/software
 export OPENMPI_VERSION=4.1.5
 export CC=armclang
