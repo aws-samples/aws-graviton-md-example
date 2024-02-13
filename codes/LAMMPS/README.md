@@ -1,37 +1,34 @@
 # README
 
-## 1. LAMMPS Compilation Example
+## 1. LAMMPS Setup
+
+### 1.1 Download LAMMPS
+
+Run [1-download-lammps.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/1-download-lammps.sh) to download the stable branch, or use the following to download a specific branch, such as `stable_23Jun2022_update4`:
+
+```bash
+INSTALLDIR=~/software
+cd $INSTALLDIR
+git clone https://github.com/lammps/lammps.git
+cd lammps
+git checkout stable_23Jun2022_update4
+```
+
+### 1.2 Compile LAMMPS
 
 This assumes both the ARM compiler and OpenMPI have already been installed.
 
-Create `compile-lammps.sbatch` as follows:
+Run [2a-compile-lammps-acfl-sve.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/2a-compile-lammps-acfl-sve.sh).
+
+To edit the compile flags, change the following line of the compile script:
 
 ```bash
-#!/bin/bash
+sed -i 's/CCFLAGS =.*/CCFLAGS = -march=armv8-a+sve -Rpass=loop-vectorize/g' ./Makefile.${target}
+```
 
-#SBATCH --job-name=compile-lammps
-#SBATCH --ntasks=64
-#SBATCH --output=%x_%j.out
+To add additional [LAMMPS packages](https://docs.lammps.org/Packages_list.html), add `make yes-<package_name>` after the `make-yes-most` line in the following section of the compile script. The following example shows how the `molecule`, `kspace`, `rigid`, `asphere`, `opt`, and `openmp` packages can be added:
 
-module use /shared/arm/modulefiles
-module load libfabric-aws
-module load acfl
-module load armpl
-
-export INSTALLDIR="/shared"
-export OPENMPI_VERSION=4.1.5
-export CC=armclang
-export CXX=armclang++
-export FC=armflang
-export CFLAGS="-mcpu=neoverse-512tvb"
-
-cd ${INSTALLDIR}/lammps/src/MAKE/MACHINES
-target="aarch64_arm_openmpi_armpl"
-echo "${target}"
-sed -i 's/CCFLAGS =\t-O3 -mcpu=native/CCFLAGS =       -O3 -march=armv8-a+sve -fopenmp -mcpu=neoverse-v1 --param=aarch64-autovec-preference=1/g' ./Makefile.${target}
-sed -i 's/LINKFLAGS =\t-g -O/LINKFLAGS =     -g -O -fopenmp/g' ./Makefile.${target}
-cd ../..
-
+```bash
 cd ${INSTALLDIR}/lammps/src
 make clean-all
 make no-all
@@ -42,50 +39,16 @@ make yes-rigid
 make yes-asphere
 make yes-opt
 make yes-openmp
-make -j mode=shlib mpi 2>&1 | tee lammps-make-shlib-mpi.out
-
-mkdir -p /shared/lammps/armpl-sve && cp ./lmp_mpi /shared/lammps/armpl-sve/lmp_aarch64_arm_openmpi_armpl && cp ./liblammps_mpi.so /shared/lammps/armpl-sve/
 ```
 
-Compile LAMMPS using:
+The following command builds the LAMMPS executable
 
 ```bash
-sbatch compile-lammps.sbatch
+make -j $(nproc) ${target}
 ```
 
-## 2. LAMMPS Submit Script Example
+### 1.3 LAMMPS Submit Script Example
 
-Create `lj-128.sbatch` for a 128-core job as follows:
+A LAMMPS submit script example is provided in [3-lammps-acfl-sve.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/3-lammps-acfl-sve.sh)
 
-```bash
-#!/bin/bash
-
-#SBATCH --job-name=lj-128
-#SBATCH --ntasks=128
-#SBATCH --error=%x_%j.err
-#SBATCH --output=%x_%j.out
-
-export OMP_NUM_THREADS=1
-module use /shared/arm/modulefiles
-module load libfabric-aws
-module load acfl
-module load armpl
-
-LAMMPS_BENCH="/shared/lammps/bench"
-cd ${LAMMPS_BENCH}
-pwd
-
-NX="32"
-NY="32"
-NZ="32"
-INPUT_FILE = "in.lj"
-mpirun -np $SLURM_NTASKS env LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/shared/lammps/armpl-sve/ \
-    /shared/lammps/armpl-sve/lmp_aarch64_arm_openmpi_armpl \
-    -var x $NX -var y $NY -var z $NZ -in ${INPUT_FILE}
-```
-
-Run the LAMMPS job using
-
-```bash
-sbatch lj-128.sbatch
-```
+To change the number of nodes, update the number of nodes in the line `#SBATCH --nodes=4` and the number of cores in the line `N="256"`, where N is the number of nodes multiplied by the cores per node (64 in the case of `hpc7g.16xlarge`).
