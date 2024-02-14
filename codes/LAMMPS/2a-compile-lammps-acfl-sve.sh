@@ -26,4 +26,4 @@ make yes-most
 make -j $(nproc) ${target}
 
 mkdir -p /shared/tools/lammps/armpl-sve
-cp ${INSTALLDIR}/lammps/src/${target} /shared/tools/lammps/armpl-sve
+cp ${INSTALLDIR}/lammps/src/lmp_${target} /shared/tools/lammps/armpl-sve/
