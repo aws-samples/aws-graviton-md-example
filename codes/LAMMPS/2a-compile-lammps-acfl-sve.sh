@@ -16,19 +16,13 @@ export FC=armflang
 cd ${INSTALLDIR}/lammps/src/MAKE/MACHINES
 target="aarch64_arm_openmpi_armpl"
 echo "${target}"
-cp Makefile.aarch64_g++_openmpi_armpl Makefile.aarch64_g++_openmpi_armpl.bak
+cp Makefile.${target} Makefile.${target}.bak
 sed -i 's/CCFLAGS =.*/CCFLAGS = -march=armv8-a+sve -Rpass=loop-vectorize/g' ./Makefile.${target}
 cd ../..
 
 make clean-all
 make no-all
 make yes-most
-make yes-molecule
-make yes-kspace
-make yes-rigid
-make yes-asphere
-make yes-opt
-make yes-openmp
 make -j $(nproc) ${target}
 
 mkdir -p /shared/tools/lammps/armpl-sve
