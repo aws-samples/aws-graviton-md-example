@@ -7,8 +7,8 @@
 #SBATCH --error=%x_%j.err
 #SBATCH --output=%x_%j.out
 
-export PATH=/shared/tools/openmpi-4.1.5-arml-34/bin:$PATH
-export LD_LIBRARY_PATH=/shared/tools/openmpi-4.1.5-arml-34/lib:$LD_LIBRARY_PATH
+export PATH=/shared/tools/openmpi-4.1.5-arml/bin:$PATH
+export LD_LIBRARY_PATH=/shared/tools/openmpi-4.1.5-arml/lib:$LD_LIBRARY_PATH
 export OMP_NUM_THREADS=1
 
 module use /shared/arm/modulefiles
@@ -17,10 +17,8 @@ module load armpl/23.04.1
 module load libfabric-aws/1.17.1
 
 # Download test case
-ls /shared/gromacsBM
-if [ $? -ne 0 ]; then
-  mkdir /shared/gromacsBM
-fi
+mkdir -p /shared/gromacsBM
+
 cd /shared/gromacsBM
 wget https://repository.prace-ri.eu/ueabs/GROMACS/2.2/GROMACS_TestCaseA.tar.xz
 tar xf GROMACS_TestCaseA.tar.xz

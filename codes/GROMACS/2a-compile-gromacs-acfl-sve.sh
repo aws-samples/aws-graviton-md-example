@@ -10,8 +10,8 @@ mkdir build_sve && cd build_sve
 
 # Install Gromacs with Arm compilers and OpenMPI 4.1.5 
 
-export PATH=/shared/tools/openmpi-4.1.5-arml-34/bin:$PATH
-export LD_LIBRARY_PATH=/shared/tools/openmpi-4.1.5-arml-34/lib:$LD_LIBRARY_PATH
+export PATH=/shared/tools/openmpi-4.1.5-arml/bin:$PATH
+export LD_LIBRARY_PATH=/shared/tools/openmpi-4.1.5-arml/lib:$LD_LIBRARY_PATH
 
 module use /shared/arm/modulefiles
 module load acfl/23.04.1
@@ -38,6 +38,6 @@ cmake .. -DGMX_BUILD_OWN_FFTW=OFF \
         -DGMX_OPENMP=off \
         -DGMX_X11=off
 
-make 
+make
 make install
 
