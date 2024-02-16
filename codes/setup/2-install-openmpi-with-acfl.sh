@@ -16,4 +16,4 @@ cd openmpi-4.1.5
 ## configure and make openmpi-4.1.5
 mkdir build-acfl && cd build-acfl
 ../configure --prefix=/shared/tools/openmpi-4.1.5-arml CC=armclang CXX=armclang++ FC=armflang --enable-mpi-cxx --enable-mpi-fortran=all --without-verbs --enable-builtin-atomics --with-libfabric=/opt/amazon/efa  --with-libfabric-libdir=/opt/amazon/efa/lib64
-make -j $(nprocs) && make install
+make -j $(nproc) && make install
