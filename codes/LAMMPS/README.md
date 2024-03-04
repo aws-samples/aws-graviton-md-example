@@ -51,4 +51,7 @@ make -j $(nproc) ${target}
 
 A LAMMPS submit script example is provided in [3-lammps-acfl-sve.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/3-lammps-acfl-sve.sh)
 
-To change the number of nodes, update the number of nodes in the line `#SBATCH --nodes=4` and the number of cores in the line `N="256"`, where N is the number of nodes multiplied by the cores per node (64 in the case of `hpc7g.16xlarge`).
+Notes:
+
+- to change the number of nodes, update the number of nodes in the line `#SBATCH --nodes=4` and the number of cores in the line `N="256"`, where N is the number of nodes multiplied by the cores per node (64 in the case of `hpc7g.16xlarge`).
+- to change the input file to another benchmark, replace `in.lj` (Lennard Jones atomic fluid) with `in.chain.scaled` (bead-spring polymer), `in.eam` (metal solid), `in.chute.scaled` (granular chute flow), or `in.rhodo.scaled` (rhodopsin protein).
