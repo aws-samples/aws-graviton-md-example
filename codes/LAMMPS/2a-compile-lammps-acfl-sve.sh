@@ -17,7 +17,7 @@ cd ${INSTALLDIR}/lammps/src/MAKE/MACHINES
 target="aarch64_arm_openmpi_armpl"
 echo "${target}"
 cp Makefile.${target} Makefile.${target}.bak
-sed -i 's/CCFLAGS =.*/CCFLAGS = -march=armv8-a+sve -Rpass=loop-vectorize/g' ./Makefile.${target}
+sed -i 's/CCFLAGS =.*/CCFLAGS = -O3 -march=armv8-a+sve -Rpass=loop-vectorize/g' ./Makefile.${target}
 cd ../..
 
 make clean-all
