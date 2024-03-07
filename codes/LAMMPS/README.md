@@ -4,7 +4,7 @@
 
 ### 1.1 Download LAMMPS
 
-Run [1-download-lammps.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/1-download-lammps.sh) to download the stable branch, or use the following to download a specific branch, such as `stable_23Jun2022_update4`:
+Run [1-download-lammps.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/1-download-lammps.sh) and switch to the specific branch of interest, such as `stable_23Jun2022_update4`:
 
 ```bash
 INSTALLDIR=~/software
