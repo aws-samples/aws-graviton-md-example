@@ -23,7 +23,7 @@ Run [2a-compile-lammps-acfl-sve.sh](https://github.com/aws-samples/aws-graviton-
 To edit the compile flags, change the following line of the compile script:
 
 ```bash
-sed -i 's/CCFLAGS =.*/CCFLAGS = -march=armv8-a+sve -Rpass=loop-vectorize/g' ./Makefile.${target}
+sed -i 's/CCFLAGS =.*/CCFLAGS = -O3 -march=armv8-a+sve/g' ./Makefile.${target}
 ```
 
 To add additional [LAMMPS packages](https://docs.lammps.org/Packages_list.html), add `make yes-<package_name>` after the `make-yes-most` line in the following section of the compile script. The following example shows how the `molecule`, `kspace`, `rigid`, `asphere`, `opt`, and `openmp` packages can be added:
