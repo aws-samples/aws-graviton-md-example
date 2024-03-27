@@ -23,9 +23,9 @@ pcluster create-cluster -n gv-cluster -c 0-md-cluster.yaml
 
 We recommend the following Compilers & Libraries:
 - Operating System: Amazon Linux 2
-- Compiler: Arm compiler for Linux (ACfL) ver. 23.04 & later
-- Library: Arm performance libraries (ArmPL) ver. 23.04 & later, included in ACfL
-- MPI: OpenMPI ver. 4.1.5 & later (latest official stable release)
+- Compiler: Arm compiler for Linux (ACfL) version 23.04 or later
+- Library: Arm performance libraries (ArmPL) version 23.04 or later, included in ACfL
+- MPI: OpenMPI version 4.1.5 or later (latest official stable release)
 
 ### Arm Compiler and Arm Performance Libraries
 
