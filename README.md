@@ -1,5 +1,7 @@
 # Molecular Dynamics on Amazon EC2 hpc7g instances
 
+**Blog Post**: [Best practices for running molecular dynamics simulations on AWS Graviton3E](https://aws.amazon.com/blogs/hpc/best-practices-for-running-molecular-dynamics-simulations-on-aws-graviton3e/)
+
 This repository provides examples to run Molecular Dynamics applications on AWS using ParallelCluster and [Hpc7g instances](https://aws.amazon.com/ec2/instance-types/hpc7g/?trk=7aa1d67a-83b9-4934-8322-71040c588cf4&sc_channel=el), powered by Graviton 3E processors. As of today we have instructions for [GROMACS](https://www.gromacs.org/) and [LAMMPS](https://www.lammps.org/). By executing the scripts you see under the `/codes` folder, you can install these scientific applications with optimal compiler options.
 
 ## ParallelCluster
@@ -73,22 +75,35 @@ sbatch 3-gromacs-acfl-sve.sh
 
 ## LAMMPS
 
-[LAMMPS](https://www.lammps.org/) is a classical molecular dynamics simulator, and is used for particle-based modelling of materials. If you follow the instructions below you will be able to download and install the application on your ParallelCluster environment. 
+[LAMMPS](https://www.lammps.org/) is a classical molecular dynamics simulator, and is used for particle-based modelling of materials. If you follow the instructions below you will be able to download and install the application on your ParallelCluster environment.
 
 ### Download Source Code
 
-Execute the [download script](codes/LAMMPS/1-download-lammps.sh) on the head node. This will download the LAMMPS source code onto `~/software`.
+Execute the [1-download-lammps.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/1-download-lammps.sh) script on the head node. This will download the LAMMPS source code onto `~/software`.
 
 ### Compilation
 
-To build LAMMPS with the optimized SVE settings, execute [this script](codes/LAMMPS/2a-compile-lammps-acfl-sve.sh) on the head node. The software will be compiled, and executables will be copied under `/shared/tools/lammps/armpl-sve`. 
+To build LAMMPS with the optimized SVE settings, execute the following scripts on the head node. The software will be compiled, and executables will be copied under `/shared/tools/lammps/armpl-sve`. These steps should be done only after both the compilers and OpenMPI have been installed.
+
+- **ARM compiler**: run [2a-compile-lammps-acfl-sve.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/2a-compile-lammps-acfl-sve.sh) 
+- **GCC compiler**: run [2b-compile-lammps-gcc.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/2b-compile-lammps-gcc.sh)
 
 ### Job Submission
 
-If you have used [this configuration file](codes/setup/0-md-cluster.yaml) to deploy your ParallelCluster environment, the cluster is set up with the [Slurm workload manager](https://slurm.schedmd.com/documentation.html). Submit the first LAMMPS job using [this example Slurm job submission script](codes/LAMMPS/3-lammps-acfl-sve.sh). You can do so by placing the script under your `/home` directory, and execute the following Slurm command. This will execute the job on 1 instance. The test case being used here is [Lennard Jones](https://www.lammps.org/bench.html#lj). 
+If you have used [this configuration file](codes/setup/0-md-cluster.yaml) to deploy your ParallelCluster environment, the cluster is set up with the [Slurm workload manager](https://slurm.schedmd.com/documentation.html). Submit the first LAMMPS job using one of the following Slurm job submission scripts. The test case being used here is [Lennard Jones](https://www.lammps.org/bench.html#lj).
+
+**ARM-compiled LAMMPS**: [3a-lammps-acfl-sve.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/3a-lammps-acfl-sve.sh)
 
 ```bash
-sbatch 3-lammps-acfl-sve.sh
+curl -LO https://raw.githubusercontent.com/aws-samples/aws-graviton-md-example/main/codes/LAMMPS/3a-lammps-acfl-sve.sh
+sbatch 3a-lammps-acfl-sve.sh
+```
+
+**GCC-compiled LAMMPS**: [3b-lammps-gcc.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/3b-lammps-gcc.sh)
+
+```bash
+curl -LO https://raw.githubusercontent.com/aws-samples/aws-graviton-md-example/main/codes/LAMMPS/3b-lammps-gcc.sh
+sbatch 3b-lammps-gcc.sh
 ```
 
 ## Security
