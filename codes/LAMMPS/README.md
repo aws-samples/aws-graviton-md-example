@@ -16,7 +16,7 @@ git checkout stable_23Jun2022_update4
 
 ### 1.2 Compile LAMMPS
 
-To edit the compile flags, change the following line of the compile script:
+To edit the compile flags, change the flags in the following lines of the compile script. The `sed` command performs a search and replace of the setting `CCFLAGS` in the `Makefile`:
 
 ```bash
 sed -i 's/CCFLAGS =.*/CCFLAGS = -O3 -march=armv8-a+sve -fopenmp/g' ./Makefile.${target}  # if compiling LAMMPS with ARM
@@ -51,12 +51,23 @@ make -j $(nproc) ${target}
 
 ### 1.3 LAMMPS Submit Script Example
 
-LAMMPS submit script examples are provided:
+LAMMPS submit script examples are provided. The `curl` command downloads the script and the `sbatch` command submits the LAMMPS job:
 
-- **ARM-compiled LAMMPS**: [3a-lammps-acfl-sve.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/3a-lammps-acfl-sve.sh)
-- **GCC-compiled LAMMPS**: [3b-lammps-gcc.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/3b-lammps-gcc.sh)
+**ARM-compiled LAMMPS**: [3a-lammps-acfl-sve.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/3a-lammps-acfl-sve.sh)
 
-Notes:
+```bash
+curl -LO https://raw.githubusercontent.com/aws-samples/aws-graviton-md-example/main/codes/LAMMPS/3a-lammps-acfl-sve.sh
+sbatch 3a-lammps-acfl-sve.sh
+```
+
+**GCC-compiled LAMMPS**: [3b-lammps-gcc.sh](https://github.com/aws-samples/aws-graviton-md-example/blob/main/codes/LAMMPS/3b-lammps-gcc.sh)
+
+```bash
+curl -LO https://raw.githubusercontent.com/aws-samples/aws-graviton-md-example/main/codes/LAMMPS/3b-lammps-gcc.sh
+sbatch 3b-lammps-gcc.sh
+```
+
+**Notes**
 
 - to change the number of nodes, update the number of nodes in the line `#SBATCH --nodes=4`
 - to change the number of OpenMP threads, update the line `export OMP_NUM_THREADS=2`, where 2 is the number of OpenMP threads
