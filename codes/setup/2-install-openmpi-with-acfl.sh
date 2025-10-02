@@ -3,7 +3,7 @@
 module use /shared/arm/modulefiles
 module load acfl/23.04.1
 module load armpl/23.04.1
-module load libfabric-aws/1.17.1
+module load libfabric-aws/2.1.0amzn2.0
 
 ## Create a folder under /home/ec2-user
 mkdir ~/software && cd ~/software
